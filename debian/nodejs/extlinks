@@ -1,0 +1,9 @@
+browser-resolve
+form-data
+tslib
+@types/chai
+@types/lodash
+@types/mocha
+@types/node
+@types/sinonjs__fake-timers
+@types/through

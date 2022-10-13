@@ -1,0 +1,2 @@
+babeljs --presets '@babel/preset-env' -o index.cjs index.js
+perl -i -pe 's/(require.*)node:/$1/' index.cjs

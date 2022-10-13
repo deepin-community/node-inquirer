@@ -1,0 +1,30 @@
+Description: export "figures" commonjs
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Reviewed-By: Yadd <yadd@debian.org>
+Last-Update: 2021-10-04
+
+--- a/figures/package.json
++++ b/figures/package.json
+@@ -11,7 +11,12 @@
+ 		"url": "https://sindresorhus.com"
+ 	},
+ 	"type": "module",
+-	"exports": "./index.js",
++	"exports": {
++		"import": "./index.js",
++		"require": "./index.cjs"
++	},
++	"main": "./index.cjs",
++	"module": "./index.js",
+ 	"engines": {
+ 		"node": ">=12"
+ 	},
+@@ -19,6 +24,7 @@
+ 		"test": "xo && ava && tsd"
+ 	},
+ 	"files": [
++		"index.cjs",
+ 		"index.js",
+ 		"index.d.ts"
+ 	],

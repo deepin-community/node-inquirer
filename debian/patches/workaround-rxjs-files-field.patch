@@ -1,0 +1,20 @@
+Description: fix install
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2021-10-04
+
+--- a/rxjs/package.json
++++ b/rxjs/package.json
+@@ -207,11 +207,7 @@
+     "webpack": "^4.31.0"
+   },
+   "files": [
+-    "dist/bundles",
+-    "dist/cjs/**/!(*.tsbuildinfo)",
+-    "dist/esm/**/!(*.tsbuildinfo)",
+-    "dist/esm5/**/!(*.tsbuildinfo)",
+-    "dist/types/**/!(*.tsbuildinfo)",
++    "dist",
+     "ajax",
+     "fetch",
+     "operators",

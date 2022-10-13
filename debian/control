@@ -1,0 +1,76 @@
+Source: node-inquirer
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Uploaders: Paolo Greppi <paolo.greppi@libpf.com>
+Section: javascript
+Testsuite: autopkgtest-pkg-nodejs
+Priority: optional
+Build-Depends: debhelper-compat (= 13)
+ , dh-sequence-nodejs
+ , chai
+ , jest <!nocheck>
+ , node-ansi-escapes <!nocheck>
+ , node-babel7
+ , node-bl <!nocheck>
+ , node-browser-resolve
+ , node-chalk <!nocheck>
+ , node-ci-info <!nocheck>
+ , node-cli-cursor <!nocheck>
+ , node-cli-spinners <!nocheck>
+ , node-cli-width <!nocheck>
+ , node-defaults <!nocheck>
+ , node-escape-string-regexp <!nocheck>
+ , node-external-editor <!nocheck>
+ , node-form-data
+ , node-fs-extra
+ , node-lodash <!nocheck>
+ , node-mute-stream <!nocheck>
+ , node-rollup-plugin-alias
+ , node-rollup-plugin-inject
+ , node-rollup-plugin-node-resolve
+ , node-run-async <!nocheck>
+ , node-sinon
+ , node-string-width <!nocheck>
+ , node-strip-ansi <!nocheck>
+ , node-through <!nocheck>
+ , node-tslib (>= 2.3.1~)
+ , node-types-lodash
+ , node-types-mocha
+ , node-types-node
+ , node-types-sinon
+ , node-types-sinon-chai
+ , node-types-through
+ , node-typescript
+ , rollup
+Standards-Version: 4.6.0
+Vcs-Browser: https://salsa.debian.org/js-team/node-inquirer
+Vcs-Git: https://salsa.debian.org/js-team/node-inquirer.git
+Homepage: https://github.com/sboudrias/Inquirer.js#readme
+Rules-Requires-Root: no
+
+Package: node-inquirer
+Architecture: all
+Depends: ${misc:Depends}
+ , mocha
+ , node-ansi-escapes
+ , node-bl
+ , node-chalk
+ , node-ci-info
+ , node-cli-cursor
+ , node-cli-spinners
+ , node-cli-width
+ , node-defaults
+ , node-escape-string-regexp
+ , node-external-editor
+ , node-lodash
+ , node-mute-stream
+ , node-run-async
+ , node-string-width
+ , node-strip-ansi
+ , node-through
+ , node-tslib (>= 2.3.1~)
+Provides: ${nodejs:Provides}
+Description: embeddable command line interface for Node.js
+ Node.js module that provides a collection of interactive user
+ interfaces and inquiry session flows for the command line.
+ .
+ Node.js is an event-based server-side JavaScript engine.

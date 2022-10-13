@@ -1,0 +1,10 @@
+coverage/
+figures/index.cjs
+ora/index.cjs
+rxjs/ajax/
+rxjs/dist/
+rxjs/fetch/
+rxjs/node_modules/
+rxjs/operators/
+rxjs/testing/
+rxjs/webSocket/

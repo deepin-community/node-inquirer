@@ -1,0 +1,115 @@
+node-inquirer (8.2.0+~cs26.5.5-1) unstable; urgency=medium
+
+  * Team upload
+  * Set upstream metadata fields: Security-Contact.
+  * Fix filenamemangle
+  * Embed typescript definitions (Closes: #996649)
+
+ -- Yadd <yadd@debian.org>  Sun, 17 Oct 2021 07:17:42 +0200
+
+node-inquirer (8.2.0+~cs18.4.2-2) unstable; urgency=medium
+
+  * Team upload
+
+  [ Chris Lamb ]
+  * Make the build reproducible (Closes: #996200)
+
+ -- Yadd <yadd@debian.org>  Tue, 12 Oct 2021 16:33:26 +0200
+
+node-inquirer (8.2.0+~cs18.4.2-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 8.2.0+~cs18.4.2
+  * Refresh patches
+  * Back to unstable
+
+ -- Yadd <yadd@debian.org>  Mon, 11 Oct 2021 08:52:44 +0200
+
+node-inquirer (8.1.5+~cs18.3.3-3) experimental; urgency=medium
+
+  * Team upload
+  * Build figures and ora commonjs file (fixes rebuilds)
+  * Fix rxjs install (workaround pkg-js-tools bug)
+  * Add lintian overrides
+
+ -- Yadd <yadd@debian.org>  Tue, 05 Oct 2021 10:44:44 +0200
+
+node-inquirer (8.1.5+~cs18.3.3-2) experimental; urgency=medium
+
+  * Team upload
+  * Build figures and ora commonjs files
+  * Fix rxjs install (workaround pkg-js-tools bug)
+
+ -- Yadd <yadd@debian.org>  Mon, 04 Oct 2021 19:04:59 +0200
+
+node-inquirer (8.1.5+~cs18.3.3-1) experimental; urgency=medium
+
+  * Team upload
+
+  [ Paolo Greppi ]
+  * Update Vcs fields for migration to https://salsa.debian.org/
+
+  [ Yadd ]
+  * Update homepage
+  * Drop patches
+  * Emulate lerna using dh-sequence-nodejs
+  * Bump debhelper from old 12 to 13.
+  * Set upstream metadata fields: Bug-Submit.
+  * Update standards version to 4.6.0, no changes needed.
+  * Add "Rules-Requires-Root: no"
+  * Use dh-sequence-nodejs instead of pkg-js-tools
+  * Fix GitHub tags regex
+  * Embed components: figures ora rxjs wcwidth
+  * New upstream version 8.1.5+~cs18.3.3
+  * Update dependencies: add mocha, node-bl, node-ci-info, node-cli-spinners,
+    node-defaults, node-escape-string-regexp, node-tslib
+  * Enable upstream test using jest (require skipped)
+  * Embed web-streams-polyfill for build only
+  * Update copyright
+  * Add lintian overrides
+  * Drop unneeded dependency version constraints
+
+ -- Yadd <yadd@debian.org>  Mon, 04 Oct 2021 14:32:34 +0200
+
+node-inquirer (3.3.0-3) unstable; urgency=medium
+
+  * Team upload
+  * Bump debhelper compatibility level to 12
+  * Declare compliance with policy 4.4.0
+  * Add debian/gbp.conf
+  * Add upstream/metadata
+  * Switch minimal test and install to pkg-js-tools (fixes debci)
+  * Update VCS fields to salsa
+
+ -- Xavier Guimard <yadd@debian.org>  Fri, 20 Sep 2019 06:54:29 +0200
+
+node-inquirer (3.3.0-2) unstable; urgency=medium
+
+  * Get rx-lite-aggregates via rx (provided by node-rx)
+
+ -- Paolo Greppi <paolo.greppi@libpf.com>  Fri, 12 Jan 2018 10:48:29 +0000
+
+node-inquirer (3.3.0-1) unstable; urgency=medium
+
+  * Team upload
+  * Relax dependency on node-expernal-editor
+  * Bump standards version
+
+  [ Paolo Greppi ]
+  * New upstream release
+
+ -- Pirate Praveen <praveen@debian.org>  Wed, 03 Jan 2018 17:02:49 +0530
+
+node-inquirer (2.0.0-2) unstable; urgency=medium
+
+  * Team upload
+  * Relax dependency on node-through2
+  * Remove node-figures dependency
+
+ -- Pirate Praveen <praveen@debian.org>  Mon, 26 Dec 2016 15:08:39 +0530
+
+node-inquirer (2.0.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #848364)
+
+ -- Paolo Greppi <paolo.greppi@libpf.com>  Fri, 23 Dec 2016 11:49:07 +0000

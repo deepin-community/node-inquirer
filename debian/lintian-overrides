@@ -1,0 +1,5 @@
+# False positives
+embedded-javascript-library usr/share/nodejs/rxjs/dist/cjs/internal/scheduler/async.js please use libjs-async
+embedded-javascript-library usr/share/nodejs/rxjs/dist/esm/internal/scheduler/async.js please use libjs-async
+embedded-javascript-library usr/share/nodejs/rxjs/dist/esm5/internal/scheduler/async.js please use libjs-async
+embedded-javascript-library usr/share/nodejs/rxjs/dist/esm5_for_rollup/internal/scheduler/async.js please use libjs-async

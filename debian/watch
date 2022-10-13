@@ -1,0 +1,38 @@
+version=4
+opts=\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-inquirer-$1/ \
+ https://github.com/SBoudrias/Inquirer.js/releases .*/archive/(?:.*/)inquirer\@([\d\.]+).tar.gz group
+
+opts=\
+component=figures,\
+ctype=nodejs,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-figures-$1/ \
+ https://github.com/sindresorhus/figures/tags .*/archive.*/v?([\d\.]+).tar.gz checksum
+
+opts=\
+component=ora,\
+ctype=nodejs,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-ora-$1/ \
+ https://github.com/sindresorhus/ora/tags .*/archive.*/v?([\d\.]+).tar.gz checksum
+
+opts=\
+component=rxjs,\
+ctype=nodejs,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-rxjs-$1/ \
+ https://github.com/reactivex/rxjs/tags .*/archive.*/v?([\d\.]+).tar.gz checksum
+
+opts=\
+component=wcwidth,\
+ctype=nodejs,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-wcwidth-$1/ \
+ https://github.com/timoxley/wcwidth/tags .*/archive.*/v?([\d\.]+).tar.gz checksum
+
+# It is not recommended use npmregistry. Please investigate more.
+# Take a look at https://wiki.debian.org/debian/watch/
+opts="searchmode=plain,component=types-inquirer,ctype=nodejs,pgpmode=none,filenamemangle=s/^.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-types-inquirer-$1/" \
+ https://registry.npmjs.org/@types/inquirer https://registry.npmjs.org/@types/inquirer/-/inquirer-([\d\.]+)@ARCHIVE_EXT@ checksum

@@ -1,0 +1,4 @@
+# Unused file
+source-is-missing rxjs/docs_app/src/assets/js/prettify.js line 32 is 625 characters long (>512)
+source-contains-prebuilt-javascript-object rxjs/docs_app/src/assets/js/prettify.js line 32 is 625 characters long (>512)
+very-long-line-length-in-source-file rxjs/docs_app/src/assets/js/prettify.js line 43 is 625 characters long (>512)
