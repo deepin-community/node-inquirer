@@ -5,9 +5,8 @@ Section: javascript
 Testsuite: autopkgtest-pkg-nodejs
 Priority: optional
 Build-Depends: debhelper-compat (= 13)
- , dh-sequence-nodejs
+ , dh-sequence-nodejs (>= 0.14.12~)
  , chai
- , jest <!nocheck>
  , node-ansi-escapes <!nocheck>
  , node-babel7
  , node-bl <!nocheck>
@@ -41,7 +40,7 @@ Build-Depends: debhelper-compat (= 13)
  , node-types-through
  , node-typescript
  , rollup
-Standards-Version: 4.6.0
+Standards-Version: 4.6.1
 Vcs-Browser: https://salsa.debian.org/js-team/node-inquirer
 Vcs-Git: https://salsa.debian.org/js-team/node-inquirer.git
 Homepage: https://github.com/sboudrias/Inquirer.js#readme

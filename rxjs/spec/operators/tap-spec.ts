@@ -1,4 +1,3 @@
-/** @prettier */
 import { expect } from 'chai';
 import { tap, mergeMap, take } from 'rxjs/operators';
 import { Subject, of, throwError, Observer, EMPTY, Observable, noop } from 'rxjs';
@@ -47,8 +46,10 @@ describe('tap', () => {
     let err = null;
     throwError(() => 'bad')
       .pipe(
-        tap(null, function (x) {
-          err = x;
+        tap({
+          error: function (x) {
+            err = x;
+          },
         })
       )
       .subscribe({
@@ -107,8 +108,10 @@ describe('tap', () => {
     let errored = false;
     throwError(() => 'bad')
       .pipe(
-        tap(null, (err: any) => {
-          expect(err).to.equal('bad');
+        tap({
+          error: (err: any) => {
+            expect(err).to.equal('bad');
+          },
         })
       )
       .subscribe({

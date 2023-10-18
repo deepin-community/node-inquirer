@@ -1,6 +1,8 @@
 coverage/
 figures/index.cjs
+node_modules/
 ora/index.cjs
+ora/ora.cjs
 rxjs/ajax/
 rxjs/dist/
 rxjs/fetch/

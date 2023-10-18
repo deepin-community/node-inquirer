@@ -17,8 +17,7 @@ A Pipeable Operator is essentially a pure function which takes one Observable as
 For example, the operator called [`map`](/api/operators/map) is analogous to the Array method of the same name. Just as `[1, 2, 3].map(x => x * x)` will yield `[1, 4, 9]`, the Observable created like this:
 
 ```ts
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { of, map } from 'rxjs';
 
 of(1, 2, 3)
   .pipe(map((x) => x * x))
@@ -33,8 +32,7 @@ of(1, 2, 3)
 will emit `1`, `4`, `9`. Another useful operator is [`first`](/api/operators/first):
 
 ```ts
-import { of } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { of, first } from 'rxjs';
 
 of(1, 2, 3)
   .pipe(first())
@@ -105,7 +103,7 @@ To explain how operators work, textual descriptions are often not enough. Many o
 
 Below you can see the anatomy of a marble diagram.
 
-<img src="../../assets/images/guide/marble-diagram-anatomy.svg">
+<img src="assets/images/guide/marble-diagram-anatomy.svg">
 
 Throughout this documentation site, we extensively use marble diagrams to explain how operators work. They may be really useful in other contexts too, like on a whiteboard or even in our unit tests (as ASCII diagrams).
 
@@ -270,8 +268,7 @@ If there is a commonly used sequence of operators in your code, use the `pipe()`
 For example, you could make a function that discarded odd values and doubled even values like this:
 
 ```ts
-import { pipe } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { pipe, filter, map } from 'rxjs';
 
 function discardOddDoubleEven() {
   return pipe(
@@ -285,7 +282,7 @@ function discardOddDoubleEven() {
 
 ### Creating new operators from scratch
 
-It is more complicated, but if you have to write an operator that cannot be made from a combination of existing operators (a rare occurrance), you can write an operator from scratch using the Observable constructor, like this:
+It is more complicated, but if you have to write an operator that cannot be made from a combination of existing operators (a rare occurrence), you can write an operator from scratch using the Observable constructor, like this:
 
 ```ts
 import { Observable, of } from 'rxjs';
@@ -320,14 +317,14 @@ function delay<T>(delayInMillis: number) {
         },
         complete() {
           hasCompleted = true;
-          // If we still have timers running, we don't want to yet.
+          // If we still have timers running, we don't want to complete yet.
           if (allTimerIDs.size === 0) {
             subscriber.complete();
           }
         },
       });
 
-      // Return the teardown logic. This will be invoked when
+      // Return the finalization logic. This will be invoked when
       // the result errors, completes, or is unsubscribed.
       return () => {
         subscription.unsubscribe();
@@ -346,7 +343,7 @@ of(1, 2, 3).pipe(delay(1000)).subscribe(console.log);
 Note that you must
 
 1. implement all three Observer functions, `next()`, `error()`, and `complete()` when subscribing to the input Observable.
-2. implement a "teardown" function that cleans up when the Observable completes (in this case by unsubscribing and clearing any pending timeouts).
-3. return that teardown function from the function passed to the Observable constructor.
+2. implement a "finalization" function that cleans up when the Observable completes (in this case by unsubscribing and clearing any pending timeouts).
+3. return that finalization function from the function passed to the Observable constructor.
 
 Of course, this is only an example; the [`delay()`](/api/operators/delay) operator already exists.

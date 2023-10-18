@@ -1,0 +1,25 @@
+Description: workaround tsc
+Author: Yadd <yadd@debian.org>
+Forwarded: no
+Last-Update: 2022-03-18
+
+--- a/rxjs/src/internal/scheduler/intervalProvider.ts
++++ b/rxjs/src/internal/scheduler/intervalProvider.ts
+@@ -16,6 +16,7 @@
+ export const intervalProvider: IntervalProvider = {
+   // When accessing the delegate, use the variable rather than `this` so that
+   // the functions can be called without being bound to the provider.
++// @ts-ignore
+   setInterval(handler: () => void, timeout?: number, ...args) {
+     const { delegate } = intervalProvider;
+     if (delegate?.setInterval) {
+--- a/rxjs/src/internal/scheduler/timeoutProvider.ts
++++ b/rxjs/src/internal/scheduler/timeoutProvider.ts
+@@ -16,6 +16,7 @@
+ export const timeoutProvider: TimeoutProvider = {
+   // When accessing the delegate, use the variable rather than `this` so that
+   // the functions can be called without being bound to the provider.
++// @ts-ignore
+   setTimeout(handler: () => void, timeout?: number, ...args) {
+     const { delegate } = timeoutProvider;
+     if (delegate?.setTimeout) {

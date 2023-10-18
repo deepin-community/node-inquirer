@@ -1,7 +1,7 @@
 Description: export ora commonjs
 Author: Yadd <yadd@debian.org>
 Forwarded: not-needed
-Last-Update: 2021-10-04
+Last-Update: 2022-03-30
 
 --- a/ora/package.json
 +++ b/ora/package.json
@@ -19,11 +19,13 @@ Last-Update: 2021-10-04
  	"engines": {
  		"node": "^12.20.0 || ^14.13.1 || >=16.0.0"
  	},
-@@ -19,6 +24,7 @@
+@@ -19,7 +24,9 @@
  		"test": "xo && ava && tsd"
  	},
  	"files": [
 +		"index.cjs",
  		"index.js",
- 		"index.d.ts"
++		"ora.cjs",
+ 		"index.d.ts",
+ 		"utilities.js"
  	],

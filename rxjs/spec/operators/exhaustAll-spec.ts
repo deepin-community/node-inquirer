@@ -1,4 +1,3 @@
-/** @prettier */
 import { expect } from 'chai';
 import { exhaustAll, mergeMap, take } from 'rxjs/operators';
 import { TestScheduler } from 'rxjs/testing';
@@ -240,33 +239,32 @@ describe('exhaust', () => {
 
     of(Promise.resolve(1), Promise.resolve(2), Promise.resolve(3))
       .pipe(exhaustAll())
-      .subscribe(
-        (x) => {
+      .subscribe({
+        next: (x) => {
           expect(x).to.equal(expected.shift());
         },
-        null,
-        () => {
+        complete: () => {
           expect(expected.length).to.equal(0);
           done();
-        }
-      );
+        },
+      });
   });
 
   it('should handle an observable of promises, where one rejects', (done) => {
     of(Promise.reject(2), Promise.resolve(1))
       .pipe(exhaustAll())
-      .subscribe(
-        (x) => {
+      .subscribe({
+        next: (x) => {
           done(new Error('should not be called'));
         },
-        (err) => {
+        error: (err) => {
           expect(err).to.equal(2);
           done();
         },
-        () => {
+        complete: () => {
           done(new Error('should not be called'));
-        }
-      );
+        },
+      });
   });
 
   it('should stop listening to a synchronous observable when unsubscribed', () => {
@@ -287,5 +285,18 @@ describe('exhaust', () => {
       });
 
     expect(sideEffects).to.deep.equal([0, 1, 2]);
+  });
+
+  it('should handle synchronously completing inner observables', (done) => {
+    let i = 1;
+    of(of(1), of(2))
+      .pipe(exhaustAll())
+      .subscribe({
+        next: (v) => expect(v).to.equal(i++),
+        complete: () => {
+          expect(i).to.equal(3);
+          done();
+        },
+      });
   });
 });

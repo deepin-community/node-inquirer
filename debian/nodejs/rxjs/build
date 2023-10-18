@@ -6,7 +6,7 @@ tsc -b ./src/tsconfig.cjs.json \
 	./src/tsconfig.types.json \
 	./spec/tsconfig.json
 find dist/ -type f -name '*.tsbuildinfo' -delete
-node ./tools/make-umd-bundle.js
+#node ./tools/make-umd-bundle.js
 #node ./tools/make-closure-core.js
 #	./src/tsconfig.cjs.spec.json \
 #	./src/tsconfig.types.spec.json \

@@ -1,4 +1,3 @@
-/** @prettier */
 import { expect } from 'chai';
 import { takeWhile, tap, mergeMap } from 'rxjs/operators';
 import { of, Observable, from } from 'rxjs';
@@ -226,8 +225,10 @@ describe('takeWhile', () => {
 
       const result = e1.pipe(
         takeWhile(predicate),
-        tap(null, null, () => {
-          expect(invoked).to.equal(3);
+        tap({
+          complete: () => {
+            expect(invoked).to.equal(3);
+          },
         })
       );
       expectObservable(result).toBe(expected);

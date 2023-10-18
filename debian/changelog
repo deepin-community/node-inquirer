@@ -1,3 +1,45 @@
+node-inquirer (8.2.5+~cs26.8.16-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 8.2.5+~cs26.8.16
+  * Unfuzz patches
+  * Drop test
+
+ -- Yadd <yadd@debian.org>  Fri, 25 Nov 2022 15:38:25 +0100
+
+node-inquirer (8.2.3+~cs26.8.8-2) unstable; urgency=medium
+
+  * team upload
+  * Replace /releases by /tags in GitHub urls
+
+ -- Yadd <yadd@debian.org>  Mon, 31 Oct 2022 10:14:51 +0100
+
+node-inquirer (8.2.3+~cs26.8.8-1) unstable; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.6.1
+  * New upstream version 8.2.3+~cs26.8.8
+
+ -- Yadd <yadd@debian.org>  Wed, 18 May 2022 18:23:59 +0200
+
+node-inquirer (8.2.1+~cs26.8.6-2) unstable; urgency=medium
+
+  * Team upload
+  * Fix ora build using mjs2cjs (fixes yarnpkg)
+
+ -- Yadd <yadd@debian.org>  Wed, 30 Mar 2022 11:31:08 +0200
+
+node-inquirer (8.2.1+~cs26.8.6-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 8.2.1+~cs26.8.6
+  * Update patches
+  * No more build rxjs browser file (needs an old rollup) (Closes: #1007894)
+  * Improve autopkgtest
+  * Update lintian overrides
+
+ -- Yadd <yadd@debian.org>  Tue, 29 Mar 2022 07:04:20 +0200
+
 node-inquirer (8.2.0+~cs26.5.5-1) unstable; urgency=medium
 
   * Team upload

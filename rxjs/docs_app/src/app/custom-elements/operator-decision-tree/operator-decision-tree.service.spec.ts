@@ -31,20 +31,20 @@ describe('OperatorDecisionTreeService', () => {
   });
 
   describe('currentSentence$', () => {
-    const initialSetence = 'Start by choosing an option from the list below.';
+    const initialSentence = 'Start by choosing an option from the list below.';
 
     beforeEach(() => {
       dataServiceStub.getDecisionTree$.and.returnValue(
         cold('x', { x: treeStub })
       );
-      service = TestBed.get(OperatorDecisionTreeService);
+      service = TestBed.inject(OperatorDecisionTreeService);
     });
 
     describe('when it is the initial sequence', () => {
       it('should emit an initial sentence', () => {
         spyOn(service, 'selectOption');
         expect(service.currentSentence$).toBeObservable(
-          cold('x', { x: initialSetence })
+          cold('x', { x: initialSentence })
         );
         expect(service.selectOption).not.toHaveBeenCalled();
       });
@@ -83,7 +83,7 @@ describe('OperatorDecisionTreeService', () => {
           service.selectOption(treeNodeStubWithOptionsA.id);
           service.startOver();
           expect(service.currentSentence$).toBeObservable(
-            cold('x', { x: initialSetence })
+            cold('x', { x: initialSentence })
           );
         });
       });
@@ -95,7 +95,7 @@ describe('OperatorDecisionTreeService', () => {
       describe('when the tree has an error', () => {
         it('should never emit', () => {
           dataServiceStub.getDecisionTree$.and.returnValue(cold('#'));
-          service = TestBed.get(OperatorDecisionTreeService);
+          service = TestBed.inject(OperatorDecisionTreeService);
           expect(service.options$).toBeObservable(cold('-'));
         });
       });
@@ -107,7 +107,7 @@ describe('OperatorDecisionTreeService', () => {
               x: { [treeNodeStubNoOptions.id]: treeNodeStubNoOptions }
             })
           );
-          service = TestBed.get(OperatorDecisionTreeService);
+          service = TestBed.inject(OperatorDecisionTreeService);
           expect(service.options$).toBeObservable(cold('-'));
         });
       });
@@ -119,7 +119,7 @@ describe('OperatorDecisionTreeService', () => {
               x: { foo: treeNodeStubNoOptions }
             })
           );
-          service = TestBed.get(OperatorDecisionTreeService);
+          service = TestBed.inject(OperatorDecisionTreeService);
           expect(service.options$).toBeObservable(cold('-'));
         });
       });
@@ -130,7 +130,7 @@ describe('OperatorDecisionTreeService', () => {
         dataServiceStub.getDecisionTree$.and.returnValue(
           cold('x', { x: treeStub })
         );
-        service = TestBed.get(OperatorDecisionTreeService);
+        service = TestBed.inject(OperatorDecisionTreeService);
       });
 
       describe('when it is the initial sequence', () => {
@@ -166,7 +166,7 @@ describe('OperatorDecisionTreeService', () => {
       dataServiceStub.getDecisionTree$.and.returnValue(
         cold('x', { x: treeStub })
       );
-      service = TestBed.get(OperatorDecisionTreeService);
+      service = TestBed.inject(OperatorDecisionTreeService);
     });
 
     describe('when not beyond the initial question', () => {
@@ -191,11 +191,11 @@ describe('OperatorDecisionTreeService', () => {
 
   describe('hasError$', () => {
     describe('when the tree has no error', () => {
-      it('shoud not emit', () => {
+      it('should not emit', () => {
         dataServiceStub.getDecisionTree$.and.returnValue(
           cold('x', { x: treeStub })
         );
-        service = TestBed.get(OperatorDecisionTreeService);
+        service = TestBed.inject(OperatorDecisionTreeService);
         expect(service.hasError$).toBeObservable(cold('-'));
       });
     });

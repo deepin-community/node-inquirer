@@ -1,4 +1,3 @@
-/** @prettier */
 import { expect } from 'chai';
 import { mergeMap, map, delay, take } from 'rxjs/operators';
 import { asapScheduler, defer, Observable, from, of, timer } from 'rxjs';
@@ -137,36 +136,36 @@ describe('mergeMap', () => {
     const project = () => from(Promise.resolve(42));
 
     const results: number[] = [];
-    source.pipe(mergeMap(project)).subscribe(
-      (x) => {
+    source.pipe(mergeMap(project)).subscribe({
+      next: (x) => {
         results.push(x);
       },
-      (err) => {
+      error: (err) => {
         done(new Error('Subscriber error handler not supposed to be called.'));
       },
-      () => {
+      complete: () => {
         expect(results).to.deep.equal([42, 42, 42, 42]);
         done();
-      }
-    );
+      },
+    });
   });
 
   it('should map values to constant rejected promises and merge', (done) => {
     const source = from([4, 3, 2, 1]);
     const project = () => from(Promise.reject<number>(42));
 
-    source.pipe(mergeMap(project)).subscribe(
-      (x) => {
+    source.pipe(mergeMap(project)).subscribe({
+      next: (x) => {
         done(new Error('Subscriber next handler not supposed to be called.'));
       },
-      (err) => {
+      error: (err) => {
         expect(err).to.equal(42);
         done();
       },
-      () => {
+      complete: () => {
         done(new Error('Subscriber complete handler not supposed to be called.'));
-      }
-    );
+      },
+    });
   });
 
   it('should map values to resolved promises and merge', (done) => {
@@ -174,36 +173,36 @@ describe('mergeMap', () => {
     const project = (value: number, index: number) => from(Promise.resolve(value + index));
 
     const results: number[] = [];
-    source.pipe(mergeMap(project)).subscribe(
-      (x) => {
+    source.pipe(mergeMap(project)).subscribe({
+      next: (x) => {
         results.push(x);
       },
-      (err) => {
+      error: (err) => {
         done(new Error('Subscriber error handler not supposed to be called.'));
       },
-      () => {
+      complete: () => {
         expect(results).to.deep.equal([4, 4, 4, 4]);
         done();
-      }
-    );
+      },
+    });
   });
 
   it('should map values to rejected promises and merge', (done) => {
     const source = from([4, 3, 2, 1]);
     const project = (value: number, index: number) => from(Promise.reject<string>('' + value + '-' + index));
 
-    source.pipe(mergeMap(project)).subscribe(
-      (x) => {
+    source.pipe(mergeMap(project)).subscribe({
+      next: (x) => {
         done(new Error('Subscriber next handler not supposed to be called.'));
       },
-      (err) => {
+      error: (err) => {
         expect(err).to.equal('4-0');
         done();
       },
-      () => {
+      complete: () => {
         done(new Error('Subscriber complete handler not supposed to be called.'));
-      }
-    );
+      },
+    });
   });
 
   it('should mergeMap many outer values to many inner values', () => {
@@ -869,16 +868,15 @@ describe('mergeMap', () => {
     const expected = ['1!', '2!', '3!', '4!'];
     let completed = false;
 
-    source.subscribe(
-      (x) => {
+    source.subscribe({
+      next: (x) => {
         expect(x).to.equal(expected.shift());
       },
-      null,
-      () => {
+      complete: () => {
         expect(expected.length).to.equal(0);
         completed = true;
-      }
-    );
+      },
+    });
 
     expect(completed).to.be.true;
   });
@@ -889,16 +887,15 @@ describe('mergeMap', () => {
     const expected = ['1!', '2!', '3!', '4!'];
     let completed = false;
 
-    source.subscribe(
-      (x) => {
+    source.subscribe({
+      next: (x) => {
         expect(x).to.equal(expected.shift());
       },
-      null,
-      () => {
+      complete: () => {
         expect(expected.length).to.equal(0);
         completed = true;
-      }
-    );
+      },
+    });
 
     expect(completed).to.be.true;
   });
