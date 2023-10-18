@@ -1,4 +1,3 @@
-/** @prettier */
 import { expect } from 'chai';
 import { throttleTime, take, map, mergeMap } from 'rxjs/operators';
 import { TestScheduler } from 'rxjs/testing';
@@ -31,13 +30,12 @@ describe('throttleTime operator', () => {
     it('should throttle events by 5 time units', (done) => {
       of(1, 2, 3)
         .pipe(throttleTime(5))
-        .subscribe(
-          (x: number) => {
+        .subscribe({
+          next: (x: number) => {
             expect(x).to.equal(1);
           },
-          null,
-          done
-        );
+          complete: done,
+        });
     });
 
     it('should throttle events multiple times', () => {

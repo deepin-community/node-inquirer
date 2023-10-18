@@ -5,5 +5,7 @@ tslib
 @types/lodash
 @types/mocha
 @types/node
+@types/sinon
+@types/sinon-chai
 @types/sinonjs__fake-timers
 @types/through

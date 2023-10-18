@@ -1,4 +1,3 @@
-/** @prettier */
 import { expect } from 'chai';
 import { filter, tap, map, mergeMap, take } from 'rxjs/operators';
 import { TestScheduler } from 'rxjs/testing';
@@ -154,8 +153,10 @@ describe('filter', () => {
 
       const result = e1.pipe(
         filter(predicate),
-        tap(null, null, () => {
-          expect(invoked).to.equal(7);
+        tap({
+          complete: () => {
+            expect(invoked).to.equal(7);
+          },
         })
       );
 
@@ -329,18 +330,18 @@ describe('filter', () => {
           throw 'bad';
         })
       )
-      .subscribe(
-        (x: number) => {
+      .subscribe({
+        next: (x: number) => {
           done(new Error('should not be called'));
         },
-        (err: any) => {
+        error: (err: any) => {
           expect(err).to.equal('bad');
           done();
         },
-        () => {
+        complete: () => {
           done(new Error('should not be called'));
-        }
-      );
+        },
+      });
   });
 
   it('should not break unsubscription chain when unsubscribed explicitly', () => {

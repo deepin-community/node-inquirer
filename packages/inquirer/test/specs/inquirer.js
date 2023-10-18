@@ -8,7 +8,6 @@ const stream = require('stream');
 const tty = require('tty');
 const { expect } = require('chai');
 const sinon = require('sinon');
-const _ = require('lodash');
 const { Observable } = require('rxjs');
 
 const inquirer = require('../../lib/inquirer');
@@ -826,7 +825,7 @@ describe('inquirer.prompt', () => {
   describe('#restoreDefaultPrompts()', () => {
     it('restore default prompts', () => {
       const ConfirmPrompt = inquirer.prompt.prompts.confirm;
-      inquirer.registerPrompt('confirm', _.noop);
+      inquirer.registerPrompt('confirm', () => {});
       inquirer.restoreDefaultPrompts();
       expect(ConfirmPrompt).to.equal(inquirer.prompt.prompts.confirm);
     });
@@ -1002,7 +1001,7 @@ describe('inquirer.prompt', () => {
 
     it('No exception when using tty other than process.stdin', () => {
       // Manually opens a new tty
-      if (ostype === 'Windows_NT') {
+      if (ostype === 'Windows_NT' || process.env.GITHUB_ACTIONS) {
         mocha.skip();
       } else {
         const input = new tty.ReadStream(fs.openSync('/dev/tty', 'r+'));

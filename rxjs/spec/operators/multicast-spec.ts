@@ -1,4 +1,3 @@
-/** @prettier */
 import { expect } from 'chai';
 import { multicast, tap, mergeMapTo, takeLast, mergeMap, refCount, retry, repeat, switchMap, map, take } from 'rxjs/operators';
 import { Subject, ReplaySubject, of, ConnectableObservable, zip, concat, Subscription, Observable, from } from 'rxjs';
@@ -33,17 +32,17 @@ describe('multicast', () => {
 
     const connectable = of(1, 2, 3, 4).pipe(multicast(new Subject<number>())) as ConnectableObservable<number>;
 
-    connectable.subscribe(
-      (x) => {
+    connectable.subscribe({
+      next: (x) => {
         expect(x).to.equal(expected.shift());
       },
-      () => {
+      error: () => {
         done(new Error('should not be called'));
       },
-      () => {
+      complete: () => {
         done();
-      }
-    );
+      },
+    });
 
     connectable.connect();
   });
@@ -75,7 +74,7 @@ describe('multicast', () => {
           },
         })
       )
-      .subscribe(null, done, done);
+      .subscribe({ error: done, complete: done });
   });
 
   it('should accept Subject factory functions', (done) => {
@@ -83,17 +82,17 @@ describe('multicast', () => {
 
     const connectable = of(1, 2, 3, 4).pipe(multicast(() => new Subject<number>())) as ConnectableObservable<number>;
 
-    connectable.subscribe(
-      (x) => {
+    connectable.subscribe({
+      next: (x) => {
         expect(x).to.equal(expected.shift());
       },
-      () => {
+      error: () => {
         done(new Error('should not be called'));
       },
-      () => {
+      complete: () => {
         done();
-      }
-    );
+      },
+    });
 
     connectable.connect();
   });
@@ -751,30 +750,28 @@ describe('multicast', () => {
 
       const source = of(1, 2, 3, 4).pipe(multicast(() => new Subject<number>())) as ConnectableObservable<number>;
 
-      source.subscribe(
-        (x) => {
+      source.subscribe({
+        next: (x) => {
           expect(x).to.equal(expected[i++]);
         },
-        null,
-        () => {
+        complete: () => {
           i = 0;
 
-          source.subscribe(
-            (x) => {
+          source.subscribe({
+            next: (x) => {
               expect(x).to.equal(expected[i++]);
             },
-            null,
-            done
-          );
+            complete: done,
+          });
 
           source.connect();
-        }
-      );
+        },
+      });
 
       source.connect();
     });
 
-    it('should not throw ObjectUnsubscribedError when used in ' + 'a switchMap', (done) => {
+    it('should not throw ObjectUnsubscribedError when used in a switchMap', (done) => {
       const source = of(1, 2, 3).pipe(
         multicast(() => new Subject<number>()),
         refCount()
@@ -784,41 +781,41 @@ describe('multicast', () => {
 
       of('a', 'b', 'c')
         .pipe(switchMap((letter) => source.pipe(map((n) => String(letter + n)))))
-        .subscribe(
-          (x) => {
+        .subscribe({
+          next: (x) => {
             expect(x).to.equal(expected.shift());
           },
-          () => {
+          error: () => {
             done(new Error('should not be called'));
           },
-          () => {
+          complete: () => {
             expect(expected.length).to.equal(0);
             done();
-          }
-        );
+          },
+        });
     });
   });
 
   describe('when given a subject', () => {
-    it('should not throw ObjectUnsubscribedError when used in ' + 'a switchMap', (done) => {
+    it('should not throw ObjectUnsubscribedError when used in a switchMap', (done) => {
       const source = of(1, 2, 3).pipe(multicast(new Subject<number>()), refCount());
 
       const expected = ['a1', 'a2', 'a3'];
 
       of('a', 'b', 'c')
         .pipe(switchMap((letter) => source.pipe(map((n) => String(letter + n)))))
-        .subscribe(
-          (x) => {
+        .subscribe({
+          next: (x) => {
             expect(x).to.equal(expected.shift());
           },
-          () => {
+          error: () => {
             done(new Error('should not be called'));
           },
-          () => {
+          complete: () => {
             expect(expected.length).to.equal(0);
             done();
-          }
-        );
+          },
+        });
     });
   });
 });

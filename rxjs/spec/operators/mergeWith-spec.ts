@@ -33,17 +33,17 @@ describe('merge operator', () => {
     const b = of(4, 5, 6, 7, 8);
     const r = [1, 2, 3, 4, 5, 6, 7, 8];
 
-    a.pipe(mergeWith(b)).subscribe(
-      val => {
+    a.pipe(mergeWith(b)).subscribe({
+      next: (val) => {
         expect(val).to.equal(r.shift());
       },
-      () => {
+      error: () => {
         done(new Error('should not be called'));
       },
-      () => {
+      complete: () => {
         done();
-      }
-    );
+      },
+    });
   });
 
   it('should merge cold and cold', () => {
@@ -137,9 +137,9 @@ describe('merge operator', () => {
       const unsub = '   ----------!           ';
 
       const result = e1.pipe(
-        map(x => x),
+        map((x) => x),
         mergeWith(e2),
-        map(x => x)
+        map((x) => x)
       );
 
       expectObservable(result, unsub).toBe(expected);
@@ -313,13 +313,12 @@ describe('mergeAll operator', () => {
 
     of(a, b)
       .pipe(mergeAll())
-      .subscribe(
-        val => {
+      .subscribe({
+        next: (val) => {
           expect(val).to.equal(r.shift());
         },
-        null,
-        done
-      );
+        complete: done,
+      });
   });
 
   it('should merge two immediately-scheduled observables', (done) => {
@@ -329,18 +328,17 @@ describe('mergeAll operator', () => {
 
     of(a, b, queueScheduler)
       .pipe(mergeAll())
-      .subscribe(
-        val => {
+      .subscribe({
+        next: (val) => {
           expect(val).to.equal(r.shift());
         },
-        null,
-        done
-      );
+        complete: done,
+      });
   });
 
   it('should stop listening to a synchronous observable when unsubscribed', () => {
     const sideEffects: number[] = [];
-    const synchronousObservable = new Observable<number>(subscriber => {
+    const synchronousObservable = new Observable<number>((subscriber) => {
       // This will check to see if the subscriber was closed on each loop
       // when the unsubscribe hits (from the `take`), it should be closed
       for (let i = 0; !subscriber.closed && i < 10; i++) {
@@ -349,10 +347,9 @@ describe('mergeAll operator', () => {
       }
     });
 
-    synchronousObservable.pipe(
-      mergeWith(of(0)),
-      take(3),
-    ).subscribe(() => { /* noop */ });
+    synchronousObservable.pipe(mergeWith(of(0)), take(3)).subscribe(() => {
+      /* noop */
+    });
 
     expect(sideEffects).to.deep.equal([0, 1, 2]);
   });
